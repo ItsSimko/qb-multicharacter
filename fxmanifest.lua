@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-Multicharacter'
-version '1.2.0'
+version '1.0.0'
 
 shared_scripts {
     '@qb-core/shared/locale.lua',
@@ -27,9 +27,10 @@ files {
     'html/index.html',
     'html/style.css',
     'html/reset.css',
-    'html/vue.js',
-    'html/swal2.js',
-    'html/profanity.js'
+    "html/vue.js",
+    "html/swal2.js",
+    'html/profanity.js',
+    'html/logo.png'
 }
 
 dependencies {

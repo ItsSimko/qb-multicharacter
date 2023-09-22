@@ -1,12 +1,3 @@
-# Disclaimer
-This script was not heavily tested. It was used in a enviroment where 20-30 players max would run through it. The script worked well on the server it was used, however, it may not work on your server. Please proceed with cautions and always back up your files before installing random scripts!!! Please feel free to contribute or contact me with issues on discord username: Hue G.
-Thanks.
-
-# Edits
-Hello everyone, this script was modified for an abandoned project. The script is very similar to the qb-multicharacter. The edits consist of the model at the start holding a mug shot board with their details and the camera change to the prison for mugshots. Example is below.
-
-# Edits End
-
 # qb-multicharacter
 Multi Character Feature for QB-Core Framework :people_holding_hands:
 
