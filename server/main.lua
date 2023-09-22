@@ -59,11 +59,19 @@ end
 
 -- Commands
 
-QBCore.Commands.Add("logout", Lang:t("commands.logout_description"), {}, false, function(source)
+QBCore.Commands.Add("fw", Lang:t("commands.logout_description"), {}, false, function(source)
     local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player then
+        if Player.Functions.GetMetaData("isdead") then
+            TriggerClientEvent('QBCore:Notify', src, "You cannot do this while dead", "error")
+            return
+        end
+    end
+
     QBCore.Player.Logout(src)
     TriggerClientEvent('qb-multicharacter:client:chooseChar', src)
-end, "admin")
+end)
 
 QBCore.Commands.Add("closeNUI", Lang:t("commands.closeNUI_description"), {}, false, function(source)
     local src = source
@@ -92,17 +100,30 @@ RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
         repeat
             Wait(10)
         until hasDonePreloading[src]
-        print('^2[qb-core]^7 '..GetPlayerName(src)..' (Citizen ID: '..cData.citizenid..') has successfully loaded!')
+        print('^2[qb-core]^7 '..GetPlayerName(src)..' (Citizen ID: '..cData.citizenid..') has succesfully loaded!')
         QBCore.Commands.Refresh(src)
         loadHouseData(src)
-        TriggerClientEvent('apartments:client:setupSpawnUI', src, cData)
-        TriggerEvent("qb-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** (<@"..(QBCore.Functions.GetIdentifier(src, 'discord'):gsub("discord:", "") or "unknown").."> |  ||"  ..(QBCore.Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(QBCore.Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.citizenid.." | "..src..") loaded..")
+        TriggerEvent("qb-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** ("..(QBCore.Functions.GetIdentifier(src, 'discord') or 'undefined') .." |  ||"  ..(QBCore.Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(QBCore.Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.citizenid.." | "..src..") loaded..")
+        exports.oxmysql:fetch("SELECT * FROM playerskins WHERE citizenid = @citizenid",
+        {
+            ["@citizenid"] = cData.citizenid,
+        }, function(data)
+          --  print(data[1])
+            if (data[1] == nil) then
+                print(GetPlayerName(src) .. ' clothing data was not found, therefore we have forced them to make a new one.')
+                TriggerClientEvent('qb-multicharacter:client:closeNUIdefault', src)
+                --TriggerClientEvent('qb-clothes:client:CreateFirstCharacter', src)
+            else
+                TriggerClientEvent('apartments:client:setupSpawnUI', src, cData)
+            end
+        end)
     end
 end)
 
 RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
     local src = source
     local newData = {}
+    
     newData.cid = data.cid
     newData.charinfo = data
     if QBCore.Player.Login(src, false, newData) then
@@ -112,14 +133,14 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
         if Apartments.Starting then
             local randbucket = (GetPlayerPed(src) .. math.random(1,999))
             SetPlayerRoutingBucket(src, randbucket)
-            print('^2[qb-core]^7 '..GetPlayerName(src)..' has successfully loaded!')
+            print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
             QBCore.Commands.Refresh(src)
             loadHouseData(src)
             TriggerClientEvent("qb-multicharacter:client:closeNUI", src)
             TriggerClientEvent('apartments:client:setupSpawnUI', src, newData)
             GiveStarterItems(src)
         else
-            print('^2[qb-core]^7 '..GetPlayerName(src)..' has successfully loaded!')
+            print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
             QBCore.Commands.Refresh(src)
             loadHouseData(src)
             TriggerClientEvent("qb-multicharacter:client:closeNUIdefault", src)
@@ -188,6 +209,7 @@ end)
 QBCore.Functions.CreateCallback("qb-multicharacter:server:getSkin", function(_, cb, cid)
     local result = MySQL.query.await('SELECT * FROM playerskins WHERE citizenid = ? AND active = ?', {cid, 1})
     if result[1] ~= nil then
+        print(result[1].skin)
         cb(result[1].model, result[1].skin)
     else
         cb(nil)
