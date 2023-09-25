@@ -1,7 +1,11 @@
+# Updated custom char selection
 [![Watch the video](https://img.youtube.com/vi/Z7N51p2KhJQ/maxresdefault.jpg)](https://youtu.be/Z7N51p2KhJQ)
 
+# DISCLAIMER
+NOTE, THIS PROJECT IS ABANDONDED AND NO LONGER UPDATED. IT WAS MADE TO WORK IN A CUSTOM ENVIROMENT AND MAY NOT WORK PROPERLY ON YOUR SERVER. USE AT YOUR OWN RISK EXPEREINCE IS REQUIRED, FEEL FREE TO FORK AND UPDATE.
 
 
+# Original
 # qb-multicharacter
 
 Multi Character Feature for QB-Core Framework :people_holding_hands:
