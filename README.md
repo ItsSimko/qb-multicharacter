@@ -1,4 +1,5 @@
-[!Example!!](https://youtu.be/Z7N51p2KhJQ)
+[![Watch the video](https://img.youtube.com/vi/Z7N51p2KhJQ/maxresdefault.jpg)](https://youtu.be/Z7N51p2KhJQ)
+
 
 
 # qb-multicharacter
