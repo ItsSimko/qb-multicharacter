@@ -1,9 +1,16 @@
 # Updated custom char selection
 [![Watch the video](https://img.youtube.com/vi/Z7N51p2KhJQ/maxresdefault.jpg)](https://youtu.be/Z7N51p2KhJQ)
+https://www.youtube.com/watch?v=Z7N51p2KhJQ&feature=youtu.be
 
 # DISCLAIMER
 NOTE, THIS PROJECT IS ABANDONDED AND NO LONGER UPDATED. IT WAS MADE TO WORK IN A CUSTOM ENVIROMENT AND MAY NOT WORK PROPERLY ON YOUR SERVER. USE AT YOUR OWN RISK EXPEREINCE IS REQUIRED, FEEL FREE TO FORK AND UPDATE.
 
+# My Updates
+- This should still be backwards compatible with previous qb-multicharacter versions. Please note you may have to trigger your skin-changer event to trigger once the register is complete.
+- Changed to have the custom character load holding the prison sign.
+- Cleaned up the UI a bit and just made it more functional and user friendly.
+- Added the GTA V sky loading animation.
+- Mostly visible changes where done.
 
 # Original
 # qb-multicharacter
